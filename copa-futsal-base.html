@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>1ª Copa Futsal Base — Comissária Continental</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#064f79;--accent:#1ea7d9;--card:#0b3550;--muted:rgba(255,255,255,0.85);}
+    *{box-sizing:border-box}
+    body{font-family:Montserrat,system-ui,Arial,sans-serif;margin:0;background:linear-gradient(180deg,var(--bg),#033a55);color:white;-webkit-font-smoothing:antialiased}
+    .container{max-width:1100px;margin:32px auto;padding:24px}
+    header{display:flex;align-items:center;gap:20px}
+    .logo{width:78px;height:78px;border-radius:10px;background:rgba(255,255,255,0.07);display:flex;align-items:center;justify-content:center;font-weight:800}
+    h1{font-size:28px;margin:0}
+    .subtitle{color:var(--muted);margin-top:6px;font-size:14px}
+    .grid{display:grid;grid-template-columns:1fr 420px;gap:28px;margin-top:22px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.03));padding:18px;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,0.35)}
+    .teams{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;align-items:center}
+    .team{display:flex;align-items:center;gap:12px;padding:8px;background:rgba(255,255,255,0.02);border-radius:8px}
+    .team img{width:48px;height:48px;object-fit:contain;border-radius:6px}
+    .team span{font-weight:600}
+    form label{display:block;font-size:13px;margin-top:12px;color:var(--muted)}
+    form input, form select, form textarea{width:100%;padding:10px;border-radius:8px;border:0;margin-top:6px;background:rgba(255,255,255,0.03);color:white}
+    .actions{display:flex;gap:10px;margin-top:12px}
+    button{background:var(--accent);border:0;padding:10px 14px;border-radius:8px;font-weight:700;color:#012529;cursor:pointer}
+    .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.08);color:var(--muted)}
+    footer{margin-top:20px;color:var(--muted);font-size:13px;text-align:center}
+    @media(max-width:900px){.grid{grid-template-columns:1fr}.teams{grid-template-columns:repeat(2,1fr)}header{flex-direction:column;align-items:flex-start}.logo{width:64px;height:64px}}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">1ª</div>
+      <div>
+        <h1>1ª Copa Futsal Base — Comissária Continental</h1>
+        <div class="subtitle">Equipes confirmadas • Pré-súmula online • Impressão rápida</div>
+      </div>
+    </header>
+
+    <main class="grid">
+      <section class="card">
+        <h2 style="margin:0 0 8px 0">Equipes Confirmadas</h2>
+        <p style="color:var(--muted);margin:0 0 14px 0">Abaixo estão as equipes inscritas. Se sua equipe não aparecer, entre em contato com a organização.</p>
+        <div class="teams">
+          <div class="team"><img src="/assets/escudo1.png" alt="Equipe 1"><span>GEB Futsal</span></div>
+          <div class="team"><img src="/assets/escudo2.png" alt="Equipe 2"><span>Escola Professor Vinícius</span></div>
+          <div class="team"><img src="/assets/escudo3.png" alt="Equipe 3"><span>Arena Estrelas</span></div>
+
+          <div class="team"><img src="/assets/escudo4.png" alt="Equipe 4"><span>RZ Academy</span></div>
+          <div class="team"><img src="/assets/escudo5.png" alt="Equipe 5"><span>Escola B10</span></div>
+          <div class="team"><img src="/assets/escudo6.png" alt="Equipe 6"><span>Picadela Futsal</span></div>
+        </div>
+
+        <hr style="border:none;border-top:1px solid rgba(255,255,255,0.04);margin:18px 0">
+        <p style="color:var(--muted);font-size:13px">Realização: Comissária Continental • Apoio: Coral Multimarcas, AABB</p>
+      </section>
+
+      <aside class="card">
+        <h3 style="margin:0 0 8px 0">Pré-súmula (online)</h3>
+        <p style="color:var(--muted);margin:0 0 12px 0;font-size:13px">Preencha os dados abaixo até a véspera do torneio. Apenas um envio por equipe.</p>
+
+        <form id="presumula" onsubmit="handleSubmit(event)">
+          <label>Nome do Clube / Escolinha</label>
+          <input name="clube" required placeholder="Ex: GEB Futsal">
+
+          <label>Categoria</label>
+          <select name="categoria" required>
+            <option value="">-- selecione --</option>
+            <option>Sub-5</option>
+            <option>Sub-7</option>
+            <option>Sub-9</option>
+          </select>
+
+          <label>Responsável (nome / telefone)</label>
+          <input name="responsavel" required placeholder="Nome - (xx) xxxxx-xxxx">
+
+          <label>Jogadores (nomes separados por vírgula)</label>
+          <textarea name="jogadores" rows="4" placeholder="Jogador 1, Jogador 2, ..." required></textarea>
+
+          <label style="margin-top:10px"><input type="checkbox" id="confirm" required> Declaro que as informações acima são verdadeiras</label>
+
+          <div class="actions">
+            <button type="submit">Enviar pré-súmula</button>
+            <button type="button" class="btn-ghost" onclick="window.print()">Imprimir página</button>
+          </div>
+        </form>
+
+        <p id="msg" style="margin-top:12px;color:var(--muted);font-size:13px"></p>
+      </aside>
+    </main>
+
+    <footer>
+      <small>© 2025 Comissária Continental — Todos os direitos reservados</small>
+    </footer>
+  </div>
+
+  <script>
+    function handleSubmit(e){
+      e.preventDefault();
+      const f = e.target;
+      const data = {
+        clube: f.clube.value.trim(),
+        categoria: f.categoria.value,
+        responsavel: f.responsavel.value.trim(),
+        jogadores: f.jogadores.value.trim()
+      };
+
+      const storageKey = 'presumula_' + data.clube.replace(/\s+/g,'_').toLowerCase();
+      localStorage.setItem(storageKey, JSON.stringify(data));
+      document.getElementById('msg').textContent = 'Pré-súmula salva localmente. Se quiser centralizar os envios, posso preparar um backend (Google Forms, Airtable ou Google Sheets).';
+      f.reset();
+    }
+  </script>
+</body>
+</html>
